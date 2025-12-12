@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research - Vivienne McGaha</title>
+    <style>
+        @font-face {
+            font-family: 'Tan Nimbus';
+            src: url('../assets/fonts/tan-nimbus.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        .main-container {
+            width: 100%;
+            margin: 0;
+            box-sizing: border-box;
+            background-color: #F5E8D6; /* LIGHT BEIGE CONTENT BACKGROUND */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background-color: #2A1F17; /* DEEP RICH DARK BROWN */
+            padding: 20px 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .nav {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav li a {
+            color: #F5E8D6; /* LIGHT BEIGE/CREAM */
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav li a:hover {
+            opacity: 0.7;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 20px;
+                padding: 20px;
+            }
+
+            .nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+        }
+
+        .content {
+            padding: 60px 40px;
+            margin: 0;
+            flex: 1;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content h1 {
+            color: #4A3A2A; /* DARK BROWN */
+            font-size: 36px;
+            margin-bottom: 30px;
+            font-family: 'Tan Nimbus', sans-serif;
+        }
+
+        .content p {
+            color: #4A3A2A; /* DARK BROWN */
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .research-item {
+            background-color: white;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .research-item h2 {
+            color: #4A3A2A;
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .research-item .research-status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .research-item .status-in-progress {
+            background-color: #F5E8D6;
+            color: #6F4D38;
+        }
+
+        .research-item .status-completed {
+            background-color: #D5B893;
+            color: #4A3A2A;
+        }
+
+        .research-item .research-date {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .research-item .research-description {
+            color: #4A3A2A;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .research-item .research-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .research-item .tag {
+            background-color: #6F4D38;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .loading {
+            text-align: center;
+            color: #4A3A2A;
+            padding: 40px;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+</head>
+<body>
+    <div class="main-container">
+        <header class="header">
+            <nav>
+                <ul class="nav">
+                    <li><a href="../index.html">HOME</a></li>
+                    <li><a href="coursework.html">RELEVANT COURSEWORK</a></li>
+                    <li><a href="research.html">RESEARCH</a></li>
+                    <li><a href="gallery.html">GALLERY</a></li>
+                    <li><a href="journal.html">JOURNAL</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <div class="content">
+            <h1 id="page-title">Research</h1>
+            <div id="content-container">
+                <div class="loading">Loading...</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function loadResearch() {
+            try {
+                const response = await fetch('../data/research.yaml');
+                const yamlText = await response.text();
+                const data = jsyaml.load(yamlText);
+                
+                document.getElementById('page-title').textContent = data.title;
+                const container = document.getElementById('content-container');
+                
+                if (data.projects && data.projects.length > 0) {
+                    container.innerHTML = data.projects.map(project => {
+                        const statusClass = project.status.toLowerCase().replace(' ', '-');
+                        const tagsHtml = project.tags ? project.tags.map(tag => 
+                            `<span class="tag">${tag}</span>`
+                        ).join('') : '';
+                        
+                        return `
+                            <div class="research-item">
+                                <h2>${project.title}</h2>
+                                <span class="research-status status-${statusClass}">${project.status}</span>
+                                <div class="research-date">${project.date}</div>
+                                <div class="research-description">${project.description}</div>
+                                ${tagsHtml ? `<div class="research-tags">${tagsHtml}</div>` : ''}
+                            </div>
+                        `;
+                    }).join('');
+                } else {
+                    container.innerHTML = '<p>No research projects available.</p>';
+                }
+            } catch (error) {
+                console.error('Error loading research:', error);
+                document.getElementById('content-container').innerHTML = 
+                    '<p>Error loading research data. Please try again later.</p>';
+            }
+        }
+
+        loadResearch();
+    </script>
+</body>
+</html>
+
+

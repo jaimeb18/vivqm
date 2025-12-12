@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Website</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        .main-container {
+            width: 100%;
+            margin: 0;
+            box-sizing: border-box;
+            background-color: #F5E8D6; /* LIGHT BEIGE CONTENT BACKGROUND */
+        }
+
+        .header {
+            background-color: #2A1F17; /* DEEP RICH DARK BROWN */
+            padding: 20px 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .nav {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav li a {
+            color: #F5E8D6; /* LIGHT BEIGE/CREAM */
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav li a:hover {
+            opacity: 0.7;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 20px;
+                padding: 20px;
+            }
+
+            .nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+        }
+
+        .hero {
+            display: flex;
+            width: 100%;
+            min-height: 600px;
+            margin-top: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-image {
+            flex: 0 0 50%;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-image-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #D5B893 0%, #c4a882 50%, #b89a71 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 18px;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .hero-content {
+            flex: 0 0 50%;
+            background-color: #F5E8D6; /* LIGHT BEIGE CONTENT BACKGROUND */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .hero-heading {
+            font-size: 42px;
+            font-weight: bold;
+            color: #4A3A2A; /* DARK BROWN */
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-text {
+            font-size: 16px;
+            color: #4A3A2A; /* DARK BROWN */
+            line-height: 1.6;
+            margin-bottom: 30px;
+            max-width: 500px;
+        }
+
+        @media (max-width: 968px) {
+            .hero {
+                flex-direction: column;
+            }
+
+            .hero-image {
+                flex: 0 0 50%;
+            }
+
+            .hero-content {
+                flex: 0 0 50%;
+                padding: 40px 30px;
+            }
+
+            .hero-heading {
+                font-size: 32px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-heading {
+                font-size: 28px;
+            }
+
+            .hero-text {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <header class="header">
+            <nav>
+                <ul class="nav">
+                    <li><a href="/">HOME</a></li>
+                    <li><a href="pages/coursework.html">RELEVANT COURSEWORK</a></li>
+                    <li><a href="pages/research.html">RESEARCH</a></li>
+                    <li><a href="pages/gallery.html">GALLERY</a></li>
+                    <li><a href="pages/journal.html">JOURNAL</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <div class="hero-image">
+                <img src="images/1.jpg" alt="Vivienne McGaha">
+            </div>
+            <div class="hero-content">
+                <h1 class="hero-heading">Hi! I'm Vivienne McGaha.</h1>
+                <p class="hero-text">I'm a Finance student at the University of Florida with interests in general management, wealth management, and organizational strategy. I am seeking opportunities in finance or consulting where I can apply my analytical and quantitative skills, contribute strategic insights, and develop the foundation for a career in business leadership.</p>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
